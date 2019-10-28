@@ -8,59 +8,49 @@ class EntryPoint
 
     static void Main()
     {
+        Console.WriteLine("2020 Calendar");
         string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
         string[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-        int numOfDays = 1;
-        //30 days have September, April, June and November
-        bool thirtyDays = false;
-        //All the rest have 31
-        bool thirtyOneDays = false;
-        //Except February all alone (27)
-        bool isItFebruary = false;
+        int daysInAMonth = 31;
+        int dayType = 0;
 
-        for (int i = 0; i < months.Length; i++)
+        for (int currentMonth = 0; currentMonth < months.Length; currentMonth++)
         {
-            if (i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12)
-            {
-                thirtyOneDays = true;
-            }
-            else if (i == 4 || i == 6 || i == 9 || i == 11)
-            {
-                thirtyDays = true;
-            }
-            else
-            {
-                isItFebruary = true;
-            }
 
-            if (i == 1)
-            {
-                Console.WriteLine("January");
+            Console.Write($"Month: {months[currentMonth]}");
+            Console.WriteLine();
 
-                for (int j = 2; j < days.Length;)
+            //One thing the instructor forgot to do was put in the code to make the month start on the right day
+            //This little piece makes the month of January start with dayType of 2 which is a Wednesday.
+            if (currentMonth == 0)
+            {
+                dayType = 2;
+            }
+           
+
+            for (int currentDay = 1; currentDay <= daysInAMonth; currentDay++)
+            {
+                Console.WriteLine($"{currentDay} {days[dayType]}");
+
+                dayType++;
+
+                if (dayType == 7)
                 {
-                    if (thirtyOneDays == true)
-                    {
-
-                        Console.Write(numOfDays + " " + days[j] + "\n");
-                        numOfDays++;
-                        j++;
-                        if (j == 7)
-                        {
-                            j = 0;
-                        }
-                        if (numOfDays > 31)
-                        {
-                            break;
-                        }
-
-
-                    }
+                    dayType = 0;
                 }
-                
+
+                if ((currentMonth == 1 && currentDay == 29) ||
+                    (currentMonth == 3 && currentDay == 30) || (currentMonth == 5 && currentDay == 30) || (currentMonth == 8 && currentDay == 30) || (currentMonth == 10 && currentDay == 30))
+                {
+                    break;
+                }
+
             }
+            Console.WriteLine();
         }
+        Console.ReadKey();
     }
+
 }
 
 
