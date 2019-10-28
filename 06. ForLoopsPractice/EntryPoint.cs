@@ -61,8 +61,8 @@ class EntryPoint
             }
         }
     }
+   
     //Automatically created methods end up being created underneath the main method
-
     private static void ViewItem(string[] characters)
     {
         Console.WriteLine("Current characters :");
